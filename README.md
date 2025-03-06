@@ -5,7 +5,8 @@
 
 Roqqu applicants' test
 
-## Project setup
+## Project setup locally
+Clone url: https://github.com/jefmat167/roqqu_test.git
 
 ```bash
 $ npm install

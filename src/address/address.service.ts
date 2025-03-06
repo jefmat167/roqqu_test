@@ -1,4 +1,4 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { CreateAddressDto } from './dto/create-address.dto';
 import { UpdateAddressDto } from './dto/update-address.dto';
 import { AddressRepository } from './entities/address.repository';
@@ -35,7 +35,11 @@ export class AddressService {
     if (!user) {
       throw new BadRequestException("User with provided ID not found");
     }
-    return await this.addressRepo.findByUserId(userId);
+    const address =  await this.addressRepo.findByUserId(userId);
+    if (!address) {
+      throw new NotFoundException("User currently doesn't have an associated address");
+    }
+    return address;
   }
 
   async findOne(id: string) {
